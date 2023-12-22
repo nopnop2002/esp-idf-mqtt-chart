@@ -87,8 +87,9 @@ http://esp32-server.local/
 - You can change the Y-axis range to auto scale or manual scale.   
 ![mqtt-chart-json-3](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/b80295ff-186f-47be-936d-01d033c768a8)
 
-- You can use the built-in menu.   
- Download plot as PNG/Zoom Area/Pan/Zoom In/Zoom Out/Hober display.   
+# Built-in menu
+You can use the built-in menu.   
+Download plot as PNG/Zoom Area/Pan/Zoom In/Zoom Out/Hober display.   
 
 ![mqtt-chart-menu-1](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/0dec3938-0417-4cfe-bab5-fc7e3ac8d617)
 ![mqtt-chart-menu-2](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/f8a0c145-86cc-45a8-89a9-0ab662482bfe)
