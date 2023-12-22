@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<style type="text/css">
+	input.dig4 { width: 4em; }
+	input.dig6 { width: 6em; }
+	input.dig8 { width: 8em; }
+	input.dig10 { width: 10em; }
+	</style>
+	<title>MQTT CHART</title>
+</head>
+
+<body>
+	<h1 id="header"></h1>
+	<div>
+		<label id="broker"></label>
+	</div>
+
+	<div id="graph"></div>
+	<div>
+		<button id="XaxisNumber" onclick="AxisSet()">X-Axis Set</button>
+		<label>Number of X-Axis</label>
+		<input type="number" class="dig4" id="RangeNumber" value="100">
+	</div>
+	<div>
+		<div>
+			<button id="YaxisRange" onclick="RangeSelect()">Y-Axis Set</button>
+			<label>Y-Axis Range</label>
+		</div>
+		<div>
+			<label><input type="radio" name="range" id="auto" value="Auto" checked />Auto</label>
+		</div>
+		<div>
+			<label><input type="radio" name="range" id="fixed" value="Fixed" />Fixed</label>
+			<input type="number" class="dig6" id="FixedRangeMin" value="0">
+			-
+			<input type="number" class="dig6" id="FixedRangeMax" value="1000">
+		</div>
+	</div>
+	<div>
+		<label>Legend Position</label>
+		<button id="LegendRight" onclick="LegendRightPush()">Legend Right Side</button>
+		<button id="LegendLeft" onclick="LegendLeftPush()">Legend Left Side</button>
+	</div>
+
+	<canvas id="canvas"></canvas>
+
+	<script>
+
+		// Draw image on canvas
+		const canvas = document.getElementById("canvas");		 
+		canvas.style.position = "absolute";
+		canvas.style.left = "10px";
+		canvas.style.top = "140px";
+		let imagePath = "/image.png";
+		draw(canvas,imagePath);
+
+		function draw(canvas,imagePath){
+			console.log("draw");
+			const image = new Image();
+			image.addEventListener("load",function (){
+				canvas.width = image.naturalWidth;
+				canvas.height = image.naturalHeight;
+				const ctx = canvas.getContext("2d");
+				ctx.drawImage(image, 0, 0);
+				console.log("load!");
+			});
+			image.src = imagePath;
+		}
+
+		function AxisSet(){
+			console.log('AxisSet');
+			const RangeNumber = document.getElementById("RangeNumber");
+			console.log('RangeNumber=' + RangeNumber.value);
+			console.log('RangeNumber length=' + RangeNumber.value.length);
+			if (RangeNumber.value.length == 0) return;
+			NumRangeNumber = Number(RangeNumber.value);
+			console.log('NumRangeNumber=' + NumRangeNumber);
+			xaxis_min = xaxis_index;
+			xaxis_max = xaxis_min + NumRangeNumber;
+			xaxis_index = xaxis_min + NumRangeNumber;
+			var xaxisView = {
+				xaxis: {
+					type: 'linear',
+					showticklabels: false,
+					range: [xaxis_min,xaxis_max]
+				}
+			};
+			Plotly.relayout('graph', xaxisView);
+		}
+
+		function RangeSelect(){
+			console.log('RangeSelect');
+			var auto = document.getElementById('auto');
+			console.log('auto=' + auto.checked);
+			var fixed = document.getElementById('fixed');
+			console.log('fixed=' + fixed.checked);
+			if (auto.checked) {
+				console.log('AutoRange');
+				Plotly.relayout('graph', 'yaxis.autorange', true);
+			} else if (fixed.checked) {
+				console.log('FixedRange');
+				const RangeMin = document.getElementById("FixedRangeMin");
+				console.log('RangeMin=' + RangeMin.value);
+				console.log('RangeMin length=' + RangeMin.value.length);
+				if (RangeMin.value.length == 0) return;
+				NumRangeMin = Number(RangeMin.value);
+				console.log('NumRangeMin=' + NumRangeMin);
+				const RangeMax = document.getElementById("FixedRangeMax");
+				console.log('RangeMax=' + RangeMax.value);
+				console.log('RangeMax length=' + RangeMax.value.length);
+				if (RangeMax.value.length == 0) return;
+				NumRangeMax = Number(RangeMax.value);
+				console.log('NumRangeMax=' + NumRangeMax);
+				//Plotly.relayout('graph', 'yaxis.range', [0, 3500]);
+				Plotly.relayout('graph', 'yaxis.range', [NumRangeMin, NumRangeMax]);
+			}
+		}
+		
+		function LegendLeftPush() {
+			console.log('LegendRightPush');
+			var layout = {
+				showlegend: true,
+				legend: {
+					x: 0,
+					y: 1,
+				}
+			};
+			Plotly.relayout('graph', layout);
+			document.getElementById("LegendRight").disabled = false;
+			document.getElementById("LegendLeft").disabled = true;
+		}
+
+		function LegendRightPush() {
+			console.log('LegendLeftPush');
+			var layout = {
+				showlegend: true,
+				legend: {
+					x: 1,
+					xanchor: 'right',
+					y: 1
+				}
+			};
+			Plotly.relayout('graph', layout);
+			document.getElementById("LegendRight").disabled = true;
+			document.getElementById("LegendLeft").disabled = false;
+		}
+
+		document.getElementById("LegendRight").disabled = false;
+		document.getElementById("LegendLeft").disabled = true;
+		document.getElementById("graph").style.display = "none";
+
+		var trace1 = {
+			x: [],
+			y: [],
+			mode: 'lines',
+			visible: false,
+			line: {
+				color: '#80CAF6',
+				shape: 'spline'
+			}
+		}
+
+		var trace2 = {
+			x: [],
+			y: [],
+			mode: 'lines',
+			visible: false,
+			line: {
+				color: '#DF56F1',
+				shape: 'spline'
+			}
+		}
+
+		var trace3 = {
+			x: [],
+			y: [],
+			mode: 'lines',
+			visible: false,
+			line: {
+				color: '#7fffd4',
+				shape: 'spline'
+			}
+		}
+
+		// Positioning the Legend Inside the Plot
+		var layout = {
+			showlegend: true,
+			legend: {
+				x: 0,
+				y: 1,
+			}
+		};
+
+		var data = [trace1, trace2, trace3];
+		Plotly.plot('graph', data, layout);
+
+	</script>
+
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
+
