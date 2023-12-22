@@ -47,11 +47,9 @@ MQTT broker is specified by one of the following.
  ```broker.emqx.io```
 
 You can download the MQTT broker from [here](https://github.com/nopnop2002/esp-idf-mqtt-broker).   
-
 ![config-broker-1](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/abe826f4-41d2-4ba3-8b99-ca0a77915208)
 
 Specifies the username and password if the server requires a password when connecting.   
-
 ![config-broker-2](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/46e84d5a-c701-4e8c-8af7-50a305adbf9c)
 
 
