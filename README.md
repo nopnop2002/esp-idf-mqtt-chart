@@ -28,7 +28,7 @@ idf.py flash monitor
 # Configuration
 
 ![config-top](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/c8debaa7-6a17-4f0a-a2d3-57d3e93fa2d9)
-![config-app](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/288da2b3-004e-464f-bed0-75cad97c8bb8)
+![config-app](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/8f454ed9-0e5f-480e-b0df-20a092fb26e2)
 
 ## WiFi Setting
 
