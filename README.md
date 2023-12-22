@@ -17,7 +17,7 @@ ESP-IDF V5.1 is required when using ESP32-C6.
 
 # Installation
 ```
-git clone -b v4.4 https://github.com/nopnop2002/esp-idf-mqtt-chart
+git clone https://github.com/nopnop2002/esp-idf-mqtt-chart
 cd esp-idf-mqtt-chart/
 git clone https://github.com/Molorius/esp32-websocket components/websocket
 idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6}
