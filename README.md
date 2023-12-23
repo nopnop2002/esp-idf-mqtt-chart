@@ -32,7 +32,7 @@ idf.py flash monitor
 
 ## WiFi Setting
 
-![config-wifi-1](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/54313903-d98e-47bb-a596-beae7b631d1e)
+![config-wifi-1](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/c5e30673-dba8-47f9-acec-96b5a9c0fd1f)
 
 You can connect using the mDNS hostname instead of the IP address.   
 ![config-wifi-2](https://github.com/nopnop2002/esp-idf-mqtt-chart/assets/6020549/9317f1df-8538-47ea-be5e-25a1a48b9ae2)
