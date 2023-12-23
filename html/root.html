@@ -71,6 +71,20 @@
 			image.src = imagePath;
 		}
 
+		canvas.addEventListener("mousedown", mouseDownListner, false);
+
+		function mouseDownListner(e) {
+			var rect = e.target.getBoundingClientRect();
+			//座標取得
+			mouseX = e.clientX - rect.left;
+			mouseY = e.clientY - rect.top;
+			console.log("mouseX=" + mouseX);
+			console.log("mouseX=" + mouseX);
+			//window.location.href = "https://plotly.com/javascript/";
+			const url = 'https://plotly.com/javascript/'
+			window.open(url, '_blank')
+		}
+
 		function AxisSet(){
 			console.log('AxisSet');
 			const RangeNumber = document.getElementById("RangeNumber");
